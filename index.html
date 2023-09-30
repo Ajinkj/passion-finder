@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find your passion with, passion finder.">
+    <meta property="og:title" content="Passion Finder by CORE">
+    <meta property="og:description" content="Find your passion and your dream study Abroad course, with the help of Passion Finder.">
+    <meta property="og:image" content="https://ajinkj.github.io/invitx/INVITX.jpg">
+    
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Passion Finder">
+    <title>Passion Finder</title>
+    <!-- Include Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('bg.gif'); /* Replace 'your-gif-url.gif' with the URL of your GIF */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            background-image: url('EDU.jpg'); /* Replace 'your-image-url.jpg' with the URL of your image */
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 200px;
+            height: 200px; /* Adjust the height as needed */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .header-text {
+            color: #fff; /* Text color */
+            font-size: 14px; /* Font size */
+            margin-top: 10px; /* Spacing between image and text */
+            text-align: center;
+            padding:  10px;
+        }
+
+        .popup {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 50px 40px;
+            text-align: center;
+            width: 90%;
+            max-width: 260px;
+            margin: 20px auto; /* Add margin to the top and bottom for spacing */
+            animation: popup-animation 0.5s ease; /* Add popup animation */
+        }
+
+        @keyframes popup-animation {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        h1 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .submit-btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            width: 80%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .whatsapp-btn {
+            background-color: #25d366;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .whatsapp-btn:hover {
+            background-color: #128c7e;
+        }
+
+        .footer {
+            background-color: transparent;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <!-- Your image content here -->
+        
+    </div>
+    <div class="header-text">
+        <p>Find your passion and your dream study Abroad course, with the help of Passion Finder.</p>
+    </div>
+    <div class="popup" id="popup">
+        <h1>Passion Finder</h1>
+        <p id="question">What's your name?</p>
+        <input type="text" id="name-input" placeholder="Enter your Answer here">
+        <!-- Use Font Awesome right arrow icon -->
+        <button id="submit-btn" class="submit-btn"><i class="fas fa-arrow-right"></i></button>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="myModal">
+        <h2>Hello, <span id="userName"></span>!</h2>
+        <p>Email: <span id="userEmail"></span></p>
+        <p>Phone: <span id="userPhone"></span></p>
+        <p>Education: <span id="userEducation"></span></p>
+        <p>Marks: <span id="userMarks"></span></p>
+        <p>Passion Finder will help you discover your passions.</p>
+        
+        <button class="whatsapp-btn" onclick="sendWhatsAppMessage()">
+            Send <i class="fab fa-whatsapp"></i>
+        </button>
+        <p>Click the send button and you will be taken to the WhatsApp, send the message that appears there and our executive will soon contact you. Let's find your passion and your dream study abroad course.</p>
+        
+    </div>
+
+    <div class="footer">
+        &copy; 2023 Ajin K J | Powered by ThinkerBytes
+    </div>
+
+    <!-- Include Font Awesome JS (optional, for certain icons) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        const popup = document.getElementById('popup');
+        const nameInput = document.getElementById('name-input');
+        const submitButton = document.getElementById('submit-btn');
+        const questionElement = document.getElementById('question');
+        const modal = document.getElementById('myModal'); // Get the modal
+
+        // Define an array of questions
+        const questions = [
+            "What's your name?",
+            "What's your email?",
+            "What's your phone number?",
+            "What's your current education level?",
+            "What are your current marks or GPA?",
+            "What are your hobbies?",
+            "What subjects do you enjoy learning about?",
+            "What activities make you lose track of time?",
+            "What problems would you like to solve?",
+            "What skills would you like to develop?",
+            "Do you plan to study abroad?",
+            "Which country would you like to study in?",
+            "What is your intended field of study?",
+            // Add more questions as needed
+        ];
+
+        let questionIndex = 0;
+        const userAnswers = [];
+        let userName = '';
+        let userEmail = '';
+        let userPhone = '';
+        let userEducation = '';
+        let userMarks = '';
+
+        // Initialize the popup and question when the page loads
+        window.onload = () => {
+            popup.style.display = 'block';
+        };
+
+        submitButton.addEventListener('click', () => {
+            if (questionIndex < questions.length) {
+                // Save the answer to the appropriate variable
+                if (questionIndex === 0) {
+                    userName = nameInput.value;
+                } else if (questionIndex === 1) {
+                    userEmail = nameInput.value;
+                } else if (questionIndex === 2) {
+                    userPhone = nameInput.value;
+                } else if (questionIndex === 3) {
+                    userEducation = nameInput.value;
+                } else if (questionIndex === 4) {
+                    userMarks = nameInput.value;
+                }
+
+                // Clear the input field
+                nameInput.value = '';
+
+                // Hide the current popup with a fade-out animation
+                popup.style.animation = 'popup-animation-reverse 0.5s ease';
+                setTimeout(() => {
+                    popup.style.display = 'none';
+
+                    // Display the next popup with a fade-in animation
+                    if (questionIndex < questions.length - 1) {
+                        popup.style.animation = 'popup-animation 0.5s ease';
+                        setTimeout(() => {
+                            questionElement.textContent = questions[questionIndex + 1];
+                            popup.style.display = 'block';
+                            questionIndex++;
+                        }, 100);
+                    } else {
+                        // Show the final modal popup
+                        modal.style.display = 'block';
+                        document.getElementById('userName').textContent = userName;
+                        document.getElementById('userEmail').textContent = userEmail;
+                        document.getElementById('userPhone').textContent = userPhone;
+                        document.getElementById('userEducation').textContent = userEducation;
+                        document.getElementById('userMarks').textContent = userMarks;
+                    }
+                }, 500);
+            }
+        });
+
+        // Function to send a WhatsApp message
+function sendWhatsAppMessage() {
+    // Prepare the WhatsApp message with the collected information
+    const message = `Hello, ${userName}!\n`
+        + `Email: ${userEmail}\n`
+        + `Phone: ${userPhone}\n`
+        + `Education: ${userEducation}\n`
+        + `Marks: ${userMarks}\n`
+        + `Hobbies: ${userAnswers[5]}\n`
+        + `Subjects of Interest: ${userAnswers[6]}\n`
+        + `Activities that make you lose track of time: ${userAnswers[7]}\n`
+        + `Problems you would like to solve: ${userAnswers[8]}\n`
+        + `Skills you would like to develop: ${userAnswers[9]}\n`
+        + `Plan to study abroad: ${userAnswers[10]}\n`
+        + `Country to study in: ${userAnswers[11]}\n`
+        + `Intended field of study: ${userAnswers[12]}\n`
+        + `Passion Finder will help you discover your passions. \n Our executive will soon contact you. Let's find your passion and your dream study abroad course.`;
+
+    // Encode the message for the WhatsApp URL
+    const encodedMessage = encodeURIComponent(message);
+
+    // Construct the WhatsApp URL
+    const whatsappURL = `https://wa.me/6238946884/?text=${encodedMessage}`;
+
+    // Open the WhatsApp message
+    window.open(whatsappURL);
+}
+
+    </script>
+</body>
+</html>
